@@ -6,7 +6,7 @@ function sendData() {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer YOUR_API_KEY' // استبدل YOUR_API_KEY بمفتاح API الخاص بك
+            'Authorization': 'sk-proj-phGCerhz72VubXi1CbysT3BlbkFJD4rXynRJ9V7cX0MO7s8q' // استبدل YOUR_API_KEY بمفتاح API الخاص بك
         },
         body: JSON.stringify({
             prompt: input1,
