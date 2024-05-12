@@ -31,6 +31,6 @@ h1 {
     display: flex;
     flex-direction: column; /* ترتيب العناصر بشكل عمودي */
     align-items: center; /* توسيط العناصر أفقيًا */
-    width: 60%; /* تحكم في عرض الفورم */
+    width: 90%; /* تحكم في عرض الفورم */
     max-width: 300px; /* أقصى عرض للفورم */
-    margin-bottom: 20px; /* مسافة بين الفورم والعناصر
+    margin-bottom: 40px; /* مسافة بين الفورم والعناصر
