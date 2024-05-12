@@ -6,7 +6,7 @@ function sendData() {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'sk-proj-phGCerhz72VubXi1CbysT3BlbkFJD4rXynRJ9V7cX0MO7s8q' // استبدل YOUR_API_KEY بمفتاح API الخاص بك
+            'Authorization': 'Bearer sk-proj-phGCerhz72VubXi1CbysT3BlbkFJD4rXynRJ9V7cX0MO7s8q'  // تم استبدال YOUR_API_KEY بمفتاحك
         },
         body: JSON.stringify({
             prompt: input1,
@@ -15,7 +15,11 @@ function sendData() {
     })
     .then(response => response.json())
     .then(data => {
-        output.value = data.choices[0].text; // تحديث مربع النتائج بناءً على البيانات الواردة
+        if (data.choices && data.choices.length > 0) {
+            output.value = data.choices[0].text;
+        } else {
+            output.value = "No response text received";
+        }
     })
     .catch(error => {
         console.error('Error:', error);
