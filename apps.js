@@ -6,7 +6,7 @@ function sendData() {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer sk-proj-phGCerhz72VubXi1CbysT3BlbkFJD4rXynRJ9V7cX0MO7s8q'  // تم استبدال YOUR_API_KEY بمفتاحك
+            'Authorization': 'Bearer sk-marketing-website-xZJY5ts4OWyzgAWf7dVwT3BlbkFJDcBaCqb1RmdO4UVopdZq'  // تم استبدال YOUR_API_KEY بمفتاحك
         },
         body: JSON.stringify({
             prompt: input1,
