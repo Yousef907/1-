@@ -4,7 +4,7 @@ async function sendData() {
     output.value = 'Processing your request...';
 
     try {
-        const response = await fetch('https://yousef907.github.io/1-/api/proxy', { // تأكد من أن URL صحيح ويشير إلى نقطة النهاية
+        const response = await fetch('https://yousef907.github.io/1-/api/proxy', { // استخدم نقطة النهاية الصحيحة
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
