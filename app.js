@@ -20,10 +20,10 @@ async function sendData() {
                 output.value = "No response text received";
             }
         } else {
-            output.value = 'Error in processing your request.';
+            output.value = `Error in processing your request. Status code: ${response.status}`;
         }
     } catch (error) {
         console.error('Error:', error);
-        output.value = 'Error in connecting to the API.';
+        output.value = `Error in connecting to the API: ${error.message}`;
     }
 }
