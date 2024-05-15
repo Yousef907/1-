@@ -1,28 +1,29 @@
-function sendData() {
-    var input1 = document.getElementById('input1').value;
-    var output = document.getElementById('output1');
+async function sendData() {
+    const input1 = document.getElementById('input1').value;
+    const output = document.getElementById('output1');
+    output.value = 'Processing your request...';
 
-    fetch('https://api.openai.com/v1/engines/text-davinci-002/completions', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer '  // تم استبدال YOUR_API_KEY بمفتاحك
-        },
-        body: JSON.stringify({
-            prompt: input1,
-            max_tokens: 150
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.choices && data.choices.length > 0) {
-            output.value = data.choices[0].text;
+    try {
+        const response = await fetch('YOUR_GITHUB_ACTIONS_URL', { // استبدل YOUR_GITHUB_ACTIONS_URL بعنوان URL للنقطة النهائية التي أنشأتها باستخدام GitHub Actions
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ prompt: input1 })
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            if (data.choices && data.choices.length > 0) {
+                output.value = data.choices[0].text;
+            } else {
+                output.value = "No response text received";
+            }
         } else {
-            output.value = "No response text received";
+            output.value = 'Error in processing your request.';
         }
-    })
-    .catch(error => {
+    } catch (error) {
         console.error('Error:', error);
-        output.value = "Error in processing your request";
-    });
+        output.value = 'Error in connecting to the API.';
+    }
 }
