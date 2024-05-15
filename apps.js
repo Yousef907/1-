@@ -4,7 +4,7 @@ async function sendData() {
     output.value = 'Processing your request...';
 
     try {
-        const response = await fetch('https://yousef907.github.io/1-/', { // استبدل YOUR_GITHUB_ACTIONS_URL بعنوان URL للنقطة النهائية التي أنشأتها باستخدام GitHub Actions
+        const response = await fetch('/api/proxy'', { // استبدل YOUR_GITHUB_ACTIONS_URL بعنوان URL للنقطة النهائية التي أنشأتها باستخدام GitHub Actions
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
