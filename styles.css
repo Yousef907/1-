@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 /* أساسيات الصفحة */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', Arial, sans-serif;
     margin: 0; /* إزالة الهامش الافتراضي */
     background-color: #eeeef8;
     display: flex;
@@ -31,6 +33,38 @@ h1 {
     display: flex;
     flex-direction: column; /* ترتيب العناصر بشكل عمودي */
     align-items: center; /* توسيط العناصر أفقيًا */
-    width: 90%; /* تحكم في عرض الفورم */
-    max-width: 300px; /* أقصى عرض للفورم */
-    margin-bottom: 40px; /* مسافة بين الفورم والعناصر
+    width: 100%; /* تحكم في عرض الفورم */
+    max-width: 400px; /* أقصى عرض للفورم */
+    margin-bottom: 40px; /* مسافة بين الفورم والعناصر */
+}
+
+input[type="text"] {
+    width: 100%; /* عرض المدخلات 100% من الحاوية */
+    padding: 10px; /* مسافة داخلية */
+    margin-bottom: 20px; /* مسافة خارجية */
+    border: 1px solid #ccc; /* حد */
+    border-radius: 4px; /* زوايا دائرية */
+    box-sizing: border-box; /* احتساب الحواف ضمن العرض والارتفاع */
+    margin-bottom: 15px; /* تباعد بين العناصر */
+}
+
+button {
+    width: 100%; /* عرض الزر 100% من الحاوية */
+    padding: 10px; /* مسافة داخلية */
+    background-color: #4CAF50; /* لون الخلفية */
+    color: white; /* لون النص */
+    border: none; /* إزالة الحد */
+    border-radius: 4px; /* زوايا دائرية */
+    cursor: pointer; /* مؤشر الفأرة */
+    font-size: 16px; /* حجم الخط */
+    margin-bottom: 15px; /* تباعد بين العناصر */
+}
+
+button:hover {
+    background-color: #45a049; /* لون الخلفية عند التمرير */
+}
+
+input[type="text"][readonly] {
+    background-color: #f9f9f9; /* لون الخلفية للمدخلات الغير قابلة للتحرير */
+    color: #666; /* لون النص للمدخلات الغير قابلة للتحرير */
+}
