@@ -16,12 +16,20 @@
     {
       "src": "app.js",
       "use": "@vercel/static"
+    },
+    {
+      "src": "images/sb_logo.png",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
       "dest": "/api/openai-proxy.js"
+    },
+    {
+      "src": "/images/(.*)",
+      "dest": "/images/$1"
     }
   ]
 }
