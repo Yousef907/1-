@@ -1,7 +1,13 @@
 const https = require('https');
 
-exports.handler = async (event) => {
-    const prompt = JSON.parse(event.body).prompt;
+export default async function handler(req, res) {
+    if (req.method !== 'POST') {
+        res.setHeader('Allow', ['POST']);
+        res.status(405).end(`Method ${req.method} Not Allowed`);
+        return;
+    }
+
+    const { prompt } = req.body;
 
     const data = JSON.stringify({
         prompt: prompt,
@@ -18,29 +24,21 @@ exports.handler = async (event) => {
         }
     };
 
-    return new Promise((resolve, reject) => {
-        const req = https.request(options, (res) => {
-            let body = '';
-            res.on('data', (chunk) => {
-                body += chunk;
-            });
-
-            res.on('end', () => {
-                resolve({
-                    statusCode: 200,
-                    body: body
-                });
-            });
+    const proxyRequest = https.request(options, (proxyRes) => {
+        let body = '';
+        proxyRes.on('data', (chunk) => {
+            body += chunk;
         });
 
-        req.on('error', (e) => {
-            reject({
-                statusCode: 500,
-                body: 'Error: ' + e.message
-            });
+        proxyRes.on('end', () => {
+            res.status(200).json(JSON.parse(body));
         });
-
-        req.write(data);
-        req.end();
     });
-};
+
+    proxyRequest.on('error', (e) => {
+        res.status(500).json({ error: 'Error in connecting to the API: ' + e.message });
+    });
+
+    proxyRequest.write(data);
+    proxyRequest.end();
+}
