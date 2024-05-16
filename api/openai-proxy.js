@@ -1,13 +1,7 @@
 const https = require('https');
 
-export default async function handler(req, res) {
-    if (req.method !== 'POST') {
-        res.setHeader('Allow', ['POST']);
-        res.status(405).end(`Method ${req.method} Not Allowed`);
-        return;
-    }
-
-    const { prompt } = req.body;
+exports.handler = async (event) => {
+    const prompt = JSON.parse(event.body).prompt;
 
     const data = JSON.stringify({
         prompt: prompt,
@@ -20,25 +14,33 @@ export default async function handler(req, res) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${process.env.OPENAI_API_KEY}` // استخدم المتغير البيئي لمفتاح API
+            'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`
         }
     };
 
-    const proxyRequest = https.request(options, (proxyRes) => {
-        let body = '';
-        proxyRes.on('data', (chunk) => {
-            body += chunk;
+    return new Promise((resolve, reject) => {
+        const req = https.request(options, (res) => {
+            let body = '';
+            res.on('data', (chunk) => {
+                body += chunk;
+            });
+
+            res.on('end', () => {
+                resolve({
+                    statusCode: 200,
+                    body: body
+                });
+            });
         });
 
-        proxyRes.on('end', () => {
-            res.status(200).json(JSON.parse(body));
+        req.on('error', (e) => {
+            reject({
+                statusCode: 500,
+                body: 'Error: ' + e.message
+            });
         });
-    });
 
-    proxyRequest.on('error', (e) => {
-        res.status(500).json({ error: 'Error in connecting to the API: ' + e.message });
+        req.write(data);
+        req.end();
     });
-
-    proxyRequest.write(data);
-    proxyRequest.end();
-}
+};
