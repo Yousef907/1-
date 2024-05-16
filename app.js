@@ -4,7 +4,7 @@ async function sendData() {
     output.value = 'Processing your request...';
 
     try {
-        const response = await fetch('https://yousef907.github.io/1-/api/proxy', { // استخدم نقطة النهاية الصحيحة
+        const response = await fetch('/api/openai-proxy', { // استخدم نقطة النهاية الجديدة
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
