@@ -4,7 +4,7 @@ async function sendData() {
     output.value = 'Processing your request...';
 
     try {
-        const response = await fetch('/api/proxy', { // تأكد من أن المسار صحيح
+        const response = await fetch('/api/proxy', { 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
