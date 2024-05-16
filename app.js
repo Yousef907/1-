@@ -4,7 +4,7 @@ async function sendData() {
     output.value = 'Processing your request...';
 
     try {
-        const response = await fetch('/api/openai-proxy', { // استخدم نقطة النهاية الجديدة
+        const response = await fetch('/api/proxy', { // تأكد من أن المسار صحيح
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -20,10 +20,12 @@ async function sendData() {
                 output.value = "No response text received";
             }
         } else {
-            output.value = `Error in processing your request. Status code: ${response.status}`;
+            output.value = 'Error in processing your request.';
         }
     } catch (error) {
         console.error('Error:', error);
-        output.value = `Error in connecting to the API: ${error.message}`;
+        output.value = 'Error in connecting to the API.';
     }
 }
+
+document.querySelector('button').onclick = sendData;
