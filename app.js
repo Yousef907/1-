@@ -14,19 +14,16 @@ async function sendData() {
 
         if (response.ok) {
             const data = await response.json();
-            if (data.text) {
-                output.value = data.text;
+            if (data.choices && data.choices.length > 0) {
+                output.value = data.choices[0].text;
             } else {
                 output.value = "No response text received";
             }
         } else {
-            const errorData = await response.json();
-            output.value = `Error in processing your request: ${errorData.error}`;
+            output.value = 'Error in processing your request.';
         }
     } catch (error) {
         console.error('Error:', error);
         output.value = 'Error in connecting to the API.';
     }
 }
-
-document.getElementById('send-button').addEventListener('click', sendData);
