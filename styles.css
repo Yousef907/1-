@@ -3,14 +3,14 @@
 /* أساسيات الصفحة */
 body {
     font-family: 'Roboto', Arial, sans-serif;
-    margin: 0; /* إزالة الهامش الافتراضي */
+    margin: 0;
     background-color: #eeeef8;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start; /* تبدأ العناصر من أعلى الصفحة */
-    height: 100vh; /* استخدام كامل ارتفاع النافذة */
-    padding-top: 40px; /* مسافة من أعلى الصفحة */
+    justify-content: flex-start;
+    height: 100vh;
+    padding-top: 40px;
 }
 
 /* توسيط النصوص والشعار */
@@ -20,51 +20,51 @@ body {
     align-items: center;
     justify-content: center;
     width: 100%;
-    margin-bottom: 20px; /* مسافة بين الشعار والنص */
+    margin-bottom: 20px;
 }
 
 h1 {
     text-align: center;
-    margin-bottom: 150px; /* مسافة بين النص والفورم */
+    margin-bottom: 150px;
 }
 
 /* توسيط العناصر في الحاوية الرئيسية */
 .form-container {
     display: flex;
-    flex-direction: column; /* ترتيب العناصر بشكل عمودي */
-    align-items: center; /* توسيط العناصر أفقيًا */
-    width: 100%; /* تحكم في عرض الفورم */
-    max-width: 400px; /* أقصى عرض للفورم */
-    margin-bottom: 40px; /* مسافة بين الفورم والعناصر */
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 40px;
 }
 
 input[type="text"] {
-    width: 100%; /* عرض المدخلات 100% من الحاوية */
-    padding: 10px; /* مسافة داخلية */
-    margin-bottom: 20px; /* مسافة خارجية */
-    border: 1px solid #ccc; /* حد */
-    border-radius: 4px; /* زوايا دائرية */
-    box-sizing: border-box; /* احتساب الحواف ضمن العرض والارتفاع */
-    margin-bottom: 15px; /* تباعد بين العناصر */
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
 }
 
 button {
-    width: 100%; /* عرض الزر 100% من الحاوية */
-    padding: 10px; /* مسافة داخلية */
-    background-color: #4CAF50; /* لون الخلفية */
-    color: white; /* لون النص */
-    border: none; /* إزالة الحد */
-    border-radius: 4px; /* زوايا دائرية */
-    cursor: pointer; /* مؤشر الفأرة */
-    font-size: 16px; /* حجم الخط */
-    margin-bottom: 15px; /* تباعد بين العناصر */
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 15px;
 }
 
 button:hover {
-    background-color: #45a049; /* لون الخلفية عند التمرير */
+    background-color: #45a049;
 }
 
 input[type="text"][readonly] {
-    background-color: #f9f9f9; /* لون الخلفية للمدخلات الغير قابلة للتحرير */
-    color: #666; /* لون النص للمدخلات الغير قابلة للتحرير */
+    background-color: #f9f9f9;
+    color: #666;
 }
