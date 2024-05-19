@@ -12,6 +12,9 @@ app.post('/api/openai-proxy', async (req, res) => {
     console.log('Received request:', req.body);
     try {
         const { prompt } = req.body;
+        if (!prompt) {
+            throw new Error('Prompt is missing in the request body.');
+        }
         console.log('Sending prompt to OpenAI:', prompt);
         const response = await openai.createCompletion({
             model: 'text-davinci-003',
@@ -21,8 +24,8 @@ app.post('/api/openai-proxy', async (req, res) => {
         console.log('Received response from OpenAI:', response.data);
         res.json({ text: response.data.choices[0].text });
     } catch (error) {
-        console.error('Error in processing request:', error);
-        res.status(500).json({ error: 'Error in processing your request.' });
+        console.error('Error in processing request:', error.message);
+        res.status(500).json({ error: `Error in processing your request: ${error.message}` });
     }
 });
 
