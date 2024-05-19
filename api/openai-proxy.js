@@ -1,34 +1,31 @@
-const { Configuration, OpenAIApi } = require("openai");
+const axios = require('axios');
 
-const configuration = new Configuration({
-    apiKey: process.env.OPENAI_API_KEY,
-});
+async function getAssistantResponse(prompt) {
+  const response = await axios.post(
+    'https://api.openai.com/v1/assistants/asst_jBQl5a13CBIVdDyqjN2JGbQj/invoke',
+    {
+      model: "gpt-4",
+      messages: [{ role: "user", content: prompt }],
+      max_tokens: 100
+    },
+    {
+      headers: {
+        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+        'Content-Type': 'application/json'
+      }
+    }
+  );
 
-const openai = new OpenAIApi(configuration);
+  return response.data.choices[0].message.content;
+}
 
 module.exports = async (req, res) => {
-    if (req.method !== 'POST') {
-        res.status(405).json({ message: "Only POST requests are allowed" });
-        return;
-    }
-
-    const { prompt } = req.body;
-
-    if (!prompt) {
-        res.status(400).json({ message: "Prompt is required" });
-        return;
-    }
-
-    try {
-        const response = await openai.createCompletion({
-            model: "gpt-4",
-            prompt: prompt,
-            max_tokens: 100,
-        });
-
-        res.status(200).json({ text: response.data.choices[0].text });
-    } catch (error) {
-        console.error("Error calling OpenAI API:", error);
-        res.status(500).json({ message: "Error calling OpenAI API", error: error.message });
-    }
+  const { prompt } = req.body;
+  try {
+    const response = await getAssistantResponse(prompt);
+    res.status(200).json({ response });
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ error: "An error occurred. Please try again." });
+  }
 };
