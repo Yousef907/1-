@@ -1,46 +1,34 @@
-const https = require('https');
+const { Configuration, OpenAIApi } = require("openai");
 
-exports.handler = async (event) => {
-    const prompt = JSON.parse(event.body).prompt;
+const configuration = new Configuration({
+    apiKey: process.env.OPENAI_API_KEY,
+});
 
-    const data = JSON.stringify({
-        prompt: prompt,
-        max_tokens: 150
-    });
+const openai = new OpenAIApi(configuration);
 
-    const options = {
-        hostname: 'api.openai.com',
-        path: '/v1/engines/text-davinci-002/completions',
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`
-        }
-    };
+module.exports = async (req, res) => {
+    if (req.method !== "POST") {
+        res.status(405).json({ message: "Only POST requests are allowed" });
+        return;
+    }
 
-    return new Promise((resolve, reject) => {
-        const req = https.request(options, (res) => {
-            let body = '';
-            res.on('data', (chunk) => {
-                body += chunk;
-            });
+    const { prompt } = req.body;
 
-            res.on('end', () => {
-                resolve({
-                    statusCode: 200,
-                    body: body
-                });
-            });
+    if (!prompt) {
+        res.status(400).json({ message: "Prompt is required" });
+        return;
+    }
+
+    try {
+        const response = await openai.createCompletion({
+            model: "text-davinci-003",
+            prompt: prompt,
+            max_tokens: 50,
         });
 
-        req.on('error', (e) => {
-            reject({
-                statusCode: 500,
-                body: 'Error: ' + e.message
-            });
-        });
-
-        req.write(data);
-        req.end();
-    });
+        res.status(200).json(response.data);
+    } catch (error) {
+        console.error("Error calling OpenAI API:", error);
+        res.status(500).json({ message: "Error calling OpenAI API" });
+    }
 };
