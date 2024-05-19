@@ -20,7 +20,7 @@ module.exports = async (req, res) => {
 
   try {
     const response = await openai.createCompletion({
-      model: "text-davinci-003-turbo",
+      model: "gpt-3.5-turbo",
       prompt: prompt,
       max_tokens: 50,
     });
