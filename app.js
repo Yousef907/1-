@@ -1,29 +1,28 @@
+async function getAssistantResponse(prompt) {
+  const response = await fetch('https://api.openai.com/v1/assistants/asst_jBQl5a13CBIVdDyqjN2JGbQj/invoke', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`, // استخدام مفتاح API المخزن في Vercel
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      model: "gpt-4",
+      messages: [{ role: "user", content: prompt }],
+      max_tokens: 100
+    })
+  });
+
+  const data = await response.json();
+  return data.choices[0].message.content;
+}
+
 async function sendData() {
-    const input1 = document.getElementById('input1').value;
-    const output = document.getElementById('output1');
-    output.value = 'Processing your request...';
-
-    try {
-        const response = await fetch('/api/openai-proxy', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ prompt: input1 })
-        });
-
-        if (response.ok) {
-            const data = await response.json();
-            if (data.content) {
-                output.value = data.content;
-            } else {
-                output.value = "No response text received";
-            }
-        } else {
-            output.value = 'Error in processing your request.';
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        output.value = 'Error in connecting to the API.';
-    }
+  const input = document.getElementById('input1').value;
+  try {
+    const response = await getAssistantResponse(input);
+    document.getElementById('output1').value = response;
+  } catch (error) {
+    console.error("Error:", error);
+    document.getElementById('output1').value = "An error occurred. Please try again.";
+  }
 }
