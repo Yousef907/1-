@@ -19,9 +19,9 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const response = await openai.createCompletion({
+    const response = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
-      prompt: prompt,
+      messages: [{ role: "user", content: prompt }],
       max_tokens: 50,
     });
 
