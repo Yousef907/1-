@@ -1,12 +1,13 @@
-const { Configuration, OpenAIApi } = require('openai');
+const { Configuration, OpenAIApi } = require("openai");
 
 const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
 });
+
 const openai = new OpenAIApi(configuration);
 
 module.exports = async (req, res) => {
-    if (req.method !== 'POST') {
+    if (req.method !== "POST") {
         res.status(405).json({ message: "Only POST requests are allowed" });
         return;
     }
@@ -27,7 +28,7 @@ module.exports = async (req, res) => {
 
         res.status(200).json(response.data);
     } catch (error) {
-        console.error('Error calling OpenAI API:', error);
-        res.status(500).json({ message: "Error calling OpenAI API", error: error.message });
+        console.error("Error calling OpenAI API:", error);
+        res.status(500).json({ message: "Error calling OpenAI API" });
     }
 };
