@@ -3,24 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Project</title>
+    <title>Shobbak Business</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <div class="logo-container">
-            <img src="images/SB-logo.png" alt="Logo of My Website" style="height: 100px;">
-        </div>
-    </header>
-    
-    <h1>Hello SB team, Welcome to the content Creation assistant, here you will have to write what ever content you wish to create, just let me know what is it about</h1>
-    
-    <div class="form-container">
-        <input type="text" id="input1" placeholder="What Content do you want?">
-        <button onclick="sendData()">Send Data</button>
-        <input type="text" id="output1" readonly placeholder="Result will be shown here">
+    <div class="logo-container">
+        <img src="images/SB-logo.png" alt="Shobbak Business Logo">
     </div>
-    
+    <h1>Hello SB team, Welcome to the content Creation assistant, here you will have to write what ever content you wish to create, just let me know what is it about</h1>
+    <div class="form-container">
+        <input type="text" id="input1" placeholder="Enter your prompt here">
+        <button onclick="sendData()">Send Data</button>
+        <textarea id="output1" readonly>No response text received</textarea>
+    </div>
     <script src="app.js"></script>
 </body>
 </html>
