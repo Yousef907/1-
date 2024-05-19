@@ -25,7 +25,7 @@ app.post('/api/openai-proxy', async (req, res) => {
         res.json({ text: response.data.choices[0].text });
     } catch (error) {
         console.error('Error in processing request:', error.message);
-        console.error('Error details:', error); // إضافة تفاصيل الخطأ الكامل للتسجيل
+        console.error('Full error details:', error); // تسجيل تفاصيل الخطأ الكاملة
         res.status(500).json({ error: `Error in processing your request: ${error.message}` });
     }
 });
