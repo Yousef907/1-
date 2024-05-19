@@ -1,6 +1,5 @@
 const express = require('express');
 const { Configuration, OpenAIApi } = require('openai');
-
 const app = express();
 app.use(express.json());
 
@@ -17,7 +16,7 @@ app.post('/api/openai-proxy', async (req, res) => {
             prompt: prompt,
             max_tokens: 100,
         });
-        res.json(response.data.choices[0].text);
+        res.json({ text: response.data.choices[0].text });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Error in processing your request.' });
