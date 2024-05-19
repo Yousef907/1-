@@ -7,7 +7,7 @@
         "start": "node api/openai-proxy.js"
     },
     "dependencies": {
-        "openai": "^3.3.0"
+        "openai": "^4.0.0"
     },
     "author": "Yousef",
     "license": "ISC"
