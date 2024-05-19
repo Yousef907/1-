@@ -1,15 +1,12 @@
 {
-    "version": 2,
-    "builds": [
-        {
-            "src": "api/openai-proxy.js",
-            "use": "@vercel/node"
-        }
-    ],
-    "routes": [
-        {
-            "src": "/api/openai-proxy",
-            "dest": "/api/openai-proxy.js"
-        }
-    ]
+  "name": "shobbak-business",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "vercel dev"
+  },
+  "dependencies": {
+    "axios": "^0.24.0",
+    "@vercel/node": "^1.9.1"
+  }
 }
