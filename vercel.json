@@ -1,35 +1,35 @@
 {
-    "version": 2,
-    "builds": [
-        {
-            "src": "api/openai-proxy.js",
-            "use": "@vercel/node"
-        },
-        {
-            "src": "index.html",
-            "use": "@vercel/static"
-        },
-        {
-            "src": "styles.css",
-            "use": "@vercel/static"
-        },
-        {
-            "src": "app.js",
-            "use": "@vercel/static"
-        },
-        {
-            "src": "images/SB-logo.png",
-            "use": "@vercel/static"
-        }
-    ],
-    "routes": [
-        {
-            "src": "/api/(.*)",
-            "dest": "/api/openai-proxy.js"
-        },
-        {
-            "src": "/images/(.*)",
-            "dest": "/images/$1"
-        }
-    ]
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/openai-proxy.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "index.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "styles.css",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "app.js",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "images/SB-logo.png",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/openai-proxy.js"
+    },
+    {
+      "src": "/images/(.*)",
+      "dest": "/images/$1"
+    }
+  ]
 }
