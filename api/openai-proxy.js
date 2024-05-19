@@ -20,13 +20,13 @@ module.exports = async (req, res) => {
     }
 
     try {
-        const response = await openai.createChatCompletion({
-            model: "gpt-4.0",
-            messages: [{ role: "user", content: prompt }],
+        const response = await openai.createCompletion({
+            model: "gpt-4",
+            prompt: prompt,
             max_tokens: 100,
         });
 
-        res.status(200).json(response.data.choices[0].message);
+        res.status(200).json(response.data.choices[0].text);
     } catch (error) {
         console.error("Error calling OpenAI API:", error);
         res.status(500).json({ message: "Error calling OpenAI API", error });
