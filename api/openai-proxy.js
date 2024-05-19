@@ -28,6 +28,6 @@ module.exports = async (req, res) => {
         res.status(200).json(response.data);
     } catch (error) {
         console.error('Error calling OpenAI API:', error);
-        res.status(500).json({ message: "Error calling OpenAI API" });
+        res.status(500).json({ message: "Error calling OpenAI API", error: error.message });
     }
 };
