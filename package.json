@@ -1,12 +1,14 @@
 {
-  "name": "1",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js"
-  },
-  "dependencies": {
-    "openai": "^3.3.0"
-  }
+    "name": "shobbak-business",
+    "version": "1.0.0",
+    "description": "A project to interact with OpenAI API using Vercel and GitHub",
+    "main": "index.js",
+    "scripts": {
+        "start": "node api/openai-proxy.js"
+    },
+    "dependencies": {
+        "openai": "^3.3.0"
+    },
+    "author": "Yousef",
+    "license": "ISC"
 }
