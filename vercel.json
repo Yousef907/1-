@@ -2,6 +2,6 @@
   "version": 2,
   "env": {
     "OPENAI_API_KEY": "@openai-api-key",
-    "asst_jBQl5a13CBIVdDyqjN2JGbQj": "@your-assistant-id"
+    "YOUR_ASSISTANT_ID": "@your-assistant-id"
   }
 }
