@@ -3,7 +3,7 @@ const { Configuration, OpenAIApi } = require('openai');
 const app = express();
 app.use(express.json());
 
-const apiKey = 'sk-m-a-BS8tfCqsVe8jzg5YB66dT3BlbkFJFZ3IrqZCVzCN4UDm1AKR'; // ضع هنا مفتاح API مباشرةً
+const apiKey = 'sk-m-a- BS8tfCqsVe8jzg5YB66dT3BlbkFJFZ3IrqZCVzCN4UDm1AKR'; // استخدم مفتاح API مباشرةً مؤقتًا
 const configuration = new Configuration({
     apiKey: apiKey,
 });
