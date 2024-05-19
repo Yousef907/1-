@@ -20,7 +20,7 @@ body {
     align-items: center;
     justify-content: center;
     width: 100%;
-    margin-bottom: 20px; /* مسافة بين الشعار والنص */
+    margin-bottom: 60px; /* مسافة بين الشعار والنص */
 }
 
 /* تصغير الشعار */
