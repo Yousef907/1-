@@ -1,23 +1,31 @@
-async function getAssistantResponse(prompt) {
-  const response = await fetch('/api/openai-proxy', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ prompt })
-  });
+const axios = require('axios');
 
-  const data = await response.json();
-  return data.response;
+async function getAssistantResponse(prompt) {
+  const response = await axios.post(
+    'https://api.openai.com/v1/assistants/YOUR_ASSISTANT_ID/invoke',
+    {
+      model: "gpt-4",
+      messages: [{ role: "user", content: prompt }],
+      max_tokens: 100
+    },
+    {
+      headers: {
+        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+        'Content-Type': 'application/json'
+      }
+    }
+  );
+
+  return response.data.choices[0].message.content;
 }
 
-async function sendData() {
-  const input = document.getElementById('input1').value;
+module.exports = async (req, res) => {
+  const { prompt } = req.body;
   try {
-    const response = await getAssistantResponse(input);
-    document.getElementById('output1').value = response;
+    const response = await getAssistantResponse(prompt);
+    res.status(200).json({ response });
   } catch (error) {
     console.error("Error:", error);
-    document.getElementById('output1').value = "An error occurred. Please try again.";
+    res.status(500).json({ error: "An error occurred. Please try again." });
   }
-}
+};
