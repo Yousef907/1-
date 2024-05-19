@@ -1,19 +1,14 @@
 async function getAssistantResponse(prompt) {
-  const response = await fetch('https://api.openai.com/v1/assistants/asst_jBQl5a13CBIVdDyqjN2JGbQj/invoke', {
+  const response = await fetch('/api/openai-proxy', {
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`, // استخدام مفتاح API المخزن في Vercel
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({
-      model: "gpt-4",
-      messages: [{ role: "user", content: prompt }],
-      max_tokens: 100
-    })
+    body: JSON.stringify({ prompt })
   });
 
   const data = await response.json();
-  return data.choices[0].message.content;
+  return data.response;
 }
 
 async function sendData() {
