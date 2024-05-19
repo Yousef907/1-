@@ -3,8 +3,9 @@ const { Configuration, OpenAIApi } = require('openai');
 const app = express();
 app.use(express.json());
 
+const apiKey = 'sk-m-a-BS8tfCqsVe8jzg5YB66dT3BlbkFJFZ3IrqZCVzCN4UDm1AKR'; // ضع هنا مفتاح API مباشرةً
 const configuration = new Configuration({
-    apiKey: process.env.OPENAI_API_KEY,
+    apiKey: apiKey,
 });
 const openai = new OpenAIApi(configuration);
 
