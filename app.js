@@ -4,7 +4,7 @@ async function sendData() {
     output.value = 'Processing your request...';
 
     try {
-        const response = await fetch('/api/proxy', { 
+        const response = await fetch('/api/openai-proxy', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -27,5 +27,3 @@ async function sendData() {
         output.value = 'Error in connecting to the API.';
     }
 }
-
-document.querySelector('button').onclick = sendData;
