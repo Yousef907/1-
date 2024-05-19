@@ -1,34 +1,29 @@
-const { Configuration, OpenAIApi } = require("openai");
-
-const configuration = new Configuration({
-    apiKey: process.env.OPENAI_API_KEY,
-});
-
-const openai = new OpenAIApi(configuration);
-
-module.exports = async (req, res) => {
-    if (req.method !== "POST") {
-        res.status(405).json({ message: "Only POST requests are allowed" });
-        return;
-    }
-
-    const { prompt } = req.body;
-
-    if (!prompt) {
-        res.status(400).json({ message: "Prompt is required" });
-        return;
-    }
+async function sendData() {
+    const input1 = document.getElementById('input1').value;
+    const output = document.getElementById('output1');
+    output.value = 'Processing your request...';
 
     try {
-        const response = await openai.createCompletion({
-            model: "gpt-3.5-turbo",
-            prompt: prompt,
-            max_tokens: 50,
+        const response = await fetch('/api/openai-proxy', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ prompt: input1 })
         });
 
-        res.status(200).json(response.data);
+        if (response.ok) {
+            const data = await response.json();
+            if (data.choices && data.choices.length > 0) {
+                output.value = data.choices[0].text;
+            } else {
+                output.value = "No response text received";
+            }
+        } else {
+            output.value = 'Error in processing your request.';
+        }
     } catch (error) {
-        console.error("Error calling OpenAI API:", error);
-        res.status(500).json({ message: "Error calling OpenAI API" });
+        console.error('Error:', error);
+        output.value = 'Error in connecting to the API.';
     }
-};
+}
