@@ -1,12 +1,12 @@
 {
   "name": "1",
   "version": "1.0.0",
-  "main": "openai-proxy.js",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "node openai-proxy.js"
+    "start": "node index.js"
   },
   "dependencies": {
-    "express": "^4.17.1",
-    "openai": "^3.1.0"
+    "openai": "^3.3.0"
   }
 }
