@@ -20,7 +20,8 @@ async function sendData() {
                 output.value = "No response text received";
             }
         } else {
-            output.value = 'Error in processing your request.';
+            const errorData = await response.json();
+            output.value = `Error in processing your request: ${errorData.error}`;
         }
     } catch (error) {
         console.error('Error:', error);
