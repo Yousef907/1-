@@ -26,9 +26,9 @@ module.exports = async (req, res) => {
             max_tokens: 100,
         });
 
-        res.status(200).json(response.data.choices[0].text);
+        res.status(200).json({ text: response.data.choices[0].text });
     } catch (error) {
         console.error("Error calling OpenAI API:", error);
-        res.status(500).json({ message: "Error calling OpenAI API", error });
+        res.status(500).json({ message: "Error calling OpenAI API", error: error.message });
     }
 };
