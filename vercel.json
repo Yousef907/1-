@@ -1,15 +1,6 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "api/openai-proxy.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/openai-proxy",
-      "dest": "/api/openai-proxy.js"
-    }
-  ]
+  "env": {
+    "OPENAI_API_KEY": "@openai-api-key"
+  }
 }
