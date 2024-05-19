@@ -14,8 +14,8 @@ async function sendData() {
 
         if (response.ok) {
             const data = await response.json();
-            if (data.choices && data.choices.length > 0) {
-                output.value = data.choices[0].text;
+            if (data.text) {
+                output.value = data.text;
             } else {
                 output.value = "No response text received";
             }
