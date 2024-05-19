@@ -1,37 +1,34 @@
-const express = require('express');
-const { Configuration, OpenAIApi } = require('openai');
-const app = express();
-app.use(express.json());
+const { Configuration, OpenAIApi } = require("openai");
 
-const apiKey = 'sk-m-a- BS8tfCqsVe8jzg5YB66dT3BlbkFJFZ3IrqZCVzCN4UDm1AKR'; // استخدم مفتاح API مباشرةً مؤقتًا
 const configuration = new Configuration({
-    apiKey: apiKey,
+    apiKey: process.env.OPENAI_API_KEY,
 });
+
 const openai = new OpenAIApi(configuration);
 
-app.post('/api/openai-proxy', async (req, res) => {
-    console.log('Received request:', req.body);
-    try {
-        const { prompt } = req.body;
-        if (!prompt) {
-            throw new Error('Prompt is missing in the request body.');
-        }
-        console.log('Sending prompt to OpenAI:', prompt);
-        const response = await openai.createCompletion({
-            model: 'text-davinci-003',
-            prompt: prompt,
-            max_tokens: 100,
-        });
-        console.log('Received response from OpenAI:', response.data);
-        res.json({ text: response.data.choices[0].text });
-    } catch (error) {
-        console.error('Error in processing request:', error.message);
-        console.error('Full error details:', error); // تسجيل تفاصيل الخطأ الكاملة
-        res.status(500).json({ error: `Error in processing your request: ${error.message}` });
+module.exports = async (req, res) => {
+    if (req.method !== 'POST') {
+        res.status(405).json({ message: "Only POST requests are allowed" });
+        return;
     }
-});
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-});
+    const { prompt } = req.body;
+
+    if (!prompt) {
+        res.status(400).json({ message: "Prompt is required" });
+        return;
+    }
+
+    try {
+        const response = await openai.createCompletion({
+            model: "text-davinci-003",
+            prompt: prompt,
+            max_tokens: 50,
+        });
+
+        res.status(200).json(response.data);
+    } catch (error) {
+        console.error("Error calling OpenAI API:", error);
+        res.status(500).json({ message: "Error calling OpenAI API" });
+    }
+};
