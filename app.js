@@ -27,3 +27,5 @@ async function sendData() {
         output.value = 'Error in connecting to the API.';
     }
 }
+
+document.getElementById('send-button').addEventListener('click', sendData);
