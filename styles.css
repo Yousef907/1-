@@ -29,7 +29,13 @@ body {
 
 h1 {
     text-align: center;
-    font-size: 20px; /* تغيير حجم الخط للنص */
+    font-size: 24px; /* تعديل حجم الخط للنص */
+    margin-bottom: 10px;
+}
+
+p {
+    text-align: center;
+    font-size: 16px;
     margin-bottom: 40px;
 }
 
