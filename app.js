@@ -2,7 +2,7 @@ const axios = require('axios');
 
 async function getAssistantResponse(prompt) {
     const response = await axios.post(
-        'https://api.openai.com/v1/assistants/YOUR_ASSISTANT_ID/invoke', // استخدام معرف المساعد الخاص بك هنا
+        `https://api.openai.com/v1/assistants/${process.env.YOUR_ASSISTANT_ID}/invoke`,
         {
             model: "gpt-4",
             messages: [{ role: "user", content: prompt }],
@@ -10,7 +10,7 @@ async function getAssistantResponse(prompt) {
         },
         {
             headers: {
-                'Authorization': `Bearer YOUR_API_KEY`, // استخدام مفتاح API الصحيح هنا
+                'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
                 'Content-Type': 'application/json'
             }
         }
