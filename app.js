@@ -15,7 +15,7 @@ async function getAssistantResponse(prompt) {
     return data.response;
 }
 
-async function sendData() {
+window.sendData = async function() {
     const input1 = document.getElementById('input1').value;
     const output1 = document.getElementById('output1');
 
