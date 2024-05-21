@@ -4,7 +4,7 @@ async function handler(req, res) {
     const prompt = req.body.prompt;
 
     const response = await axios.post(
-        'https://api.openai.com/v1/assistants/YOUR_ASSISTANT_ID/invoke',
+        `https://api.openai.com/v1/assistants/${process.env.YOUR_ASSISTANT_ID}/invoke`,
         {
             model: "gpt-4",
             messages: [{ role: "user", content: prompt }],
