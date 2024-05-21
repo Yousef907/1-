@@ -1,22 +1,18 @@
-const axios = require('axios');
-
 async function getAssistantResponse(prompt) {
-    const response = await axios.post(
-        `https://api.openai.com/v1/assistants/${process.env.YOUR_ASSISTANT_ID}/invoke`,
-        {
-            model: "gpt-4",
-            messages: [{ role: "user", content: prompt }],
-            max_tokens: 100
+    const response = await fetch('/api/openai-proxy', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
         },
-        {
-            headers: {
-                'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
-                'Content-Type': 'application/json'
-            }
-        }
-    );
+        body: JSON.stringify({ prompt })
+    });
 
-    return response.data.choices[0].message.content;
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+
+    const data = await response.json();
+    return data.response;
 }
 
 async function sendData() {
@@ -31,5 +27,3 @@ async function sendData() {
         output1.value = 'An error occurred. Please try again.';
     }
 }
-
-module.exports = { getAssistantResponse };
