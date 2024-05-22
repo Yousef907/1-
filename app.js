@@ -1,21 +1,12 @@
 async function getAssistantResponse(prompt) {
-    const response = await fetch('/api/openai-proxy', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ prompt })
+    const response = await axios.post('/api/openai-proxy', {
+        prompt: prompt
     });
 
-    if (!response.ok) {
-        throw new Error('Network response was not ok');
-    }
-
-    const data = await response.json();
-    return data.response;
+    return response.data.response;
 }
 
-window.sendData = async function() {
+async function sendData() {
     const input1 = document.getElementById('input1').value;
     const output1 = document.getElementById('output1');
 
